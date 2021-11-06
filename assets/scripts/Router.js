@@ -73,11 +73,13 @@ export class Router {
       } else {
         hash = `#${page}`
       }
+
+      let url = window.location.origin + hash
     
       if (!statePopped && window.location.hash != hash) {
-        history.pushState({page},"", hash)
+        history.pushState({page},"", url)
       }
-
+      //console.log(window.location.origin)
       this[page]()
 
 

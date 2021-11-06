@@ -110,7 +110,7 @@ function createRecipeCards() {
     // Inputs the data for the card. This is just the first recipe in the recipes array,
     // being used as the key for the recipeData object
     recipeCard.data = recipeData[recipes[i]];
-    
+
     recipeCard.classList.toggle("hidden", i > 2)
   
     // This gets the page name of each of the arrays - which is basically
@@ -184,6 +184,11 @@ function bindEscKey() {
    * if the escape key is pressed, use your router to navigate() to the 'home'
    * page. This will let us go back to the home page from the detailed page.
    */
+   window.addEventListener('keydown', (event) => {
+     if (event.key == 'Escape') {
+       router.navigate('home');
+     }
+   })
 }
 
 /**
@@ -205,4 +210,12 @@ function bindPopstate() {
    * so your navigate() function does not add your going back action to the history,
    * creating an infinite loop
    */
+  window.addEventListener('popstate', (event) => {
+    //console.log(event.state)
+    if (event.state) {
+      router.navigate(event.state.page, true);
+    } else {
+      router.navigate("home", true);
+    }
+  })
 }
